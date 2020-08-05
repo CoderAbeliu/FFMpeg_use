@@ -28,7 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor whiteColor];
-    NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"stream1" ofType:@"h264"];
+    NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"mp4"];
     self.fileHandle = [[YJFileParseHandler alloc] initWithFilePath:videoPath];
     self.decode = [[YJFFMpegDecode alloc] initWithFormatContext:[self.fileHandle formatContext] videoIndex:[self.fileHandle videoIndex]];
     self.decode.delegate = self;
@@ -51,7 +51,7 @@
 
 - (void)stopParse:(UIButton *)sender {
     if (self.fileHandle.parseStatus) {
-        NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"stream1" ofType:@"h264"];
+        NSString *videoPath = [[NSBundle mainBundle] pathForResource:@"local" ofType:@"mp4"];
         self.fileHandle = [[YJFileParseHandler alloc] initWithFilePath:videoPath];
         [self.fileHandle startGetAVPacketBlock:^(AVPacket packet) {
             // 读取速度很快，会出现快播,但在实际的数据流传输中，读取是可控的

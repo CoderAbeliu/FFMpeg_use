@@ -18,7 +18,7 @@
 
 @protocol YJFFMpegDelegate <NSObject>
 
-- (void)getVideoBufferByFFMpeg:(CMSampleBufferRef)samplerBuffer;
+- (void)getVideoBufferByFFMpeg:(CMSampleBufferRef _Nullable )samplerBuffer;
 
 @end
 NS_ASSUME_NONNULL_BEGIN
