@@ -40,7 +40,7 @@
 		1089CE6C24D7ED6500DE4584 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1089CE6B24D7ED6500DE4584 /* libresolv.tbd */; };
 		1089CE6D24D7EDC000DE4584 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1089CE3824D7E3C100DE4584 /* libavfilter.a */; };
 		1089CE7B24D7EE1600DE4584 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1089CE7A24D7EE1600DE4584 /* libx264.a */; };
-		1089CE8924D82A1D00DE4584 /* local.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 1089CE8824D82A1D00DE4584 /* local.mp4 */; };
+		108FFF2824DD364F005A1AF1 /* normal1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 108FFF2724DD364F005A1AF1 /* normal1.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,7 +221,7 @@
 		1089CE7724D7EE1600DE4584 /* x264_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x264_config.h; sourceTree = "<group>"; };
 		1089CE7824D7EE1600DE4584 /* x264.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x264.h; sourceTree = "<group>"; };
 		1089CE7A24D7EE1600DE4584 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
-		1089CE8824D82A1D00DE4584 /* local.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = local.mp4; sourceTree = "<group>"; };
+		108FFF2724DD364F005A1AF1 /* normal1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = normal1.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,8 +269,8 @@
 		105DE02924D9017900523B85 /* File */ = {
 			isa = PBXGroup;
 			children = (
-				1089CE8824D82A1D00DE4584 /* local.mp4 */,
 				105DE02A24D9017D00523B85 /* stream1.h264 */,
+				108FFF2724DD364F005A1AF1 /* normal1.mp4 */,
 			);
 			path = File;
 			sourceTree = "<group>";
@@ -715,9 +715,9 @@
 				1089CD9724D7DFC900DE4584 /* LaunchScreen.storyboard in Resources */,
 				1089CD9424D7DFC900DE4584 /* Assets.xcassets in Resources */,
 				1089CE5624D7E6F200DE4584 /* XDXPreviewRGBShader.fsh in Resources */,
-				1089CE8924D82A1D00DE4584 /* local.mp4 in Resources */,
 				105DE02B24D901F900523B85 /* stream1.h264 in Resources */,
 				1089CE5524D7E6F200DE4584 /* XDXPreviewNV12Shader.fsh in Resources */,
+				108FFF2824DD364F005A1AF1 /* normal1.mp4 in Resources */,
 				1089CE5424D7E6F200DE4584 /* XDXPreviewRGBShader.vsh in Resources */,
 				1089CE5724D7E6F200DE4584 /* XDXPreviewNV12Shader.vsh in Resources */,
 				1089CD9224D7DFBE00DE4584 /* Main.storyboard in Resources */,

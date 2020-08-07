@@ -14,7 +14,7 @@
 #import <libavfilter/buffersink.h>
 
 
-#define KVIDEOTOOLBOX 0
+#define KVIDEOTOOLBOX 1
 
 static AVBufferRef *hw_device_ctx = NULL;
 AVFilterContext *buffersink_ctx;
@@ -38,8 +38,8 @@ AVFilterGraph *filter_graph;
         pFormatContext = formatContext;
         pBaseTime = 0;
         [self initCodecContextWithContext:formatContext];
-        if (![self initFilters]) {
-            NSLog(@"初始化滤镜失败");
+        if (!KVIDEOTOOLBOX) {
+            [self initFilters];
         }
     }
     return self;

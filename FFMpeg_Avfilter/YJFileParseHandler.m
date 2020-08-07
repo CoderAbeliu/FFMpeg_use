@@ -20,13 +20,12 @@
     self = [super init];
     if (self) {
         av_register_all();
-        AVDictionary     *opts          = NULL;
-        av_dict_set(&opts, "timeout", "1000000", 0);
-        int ret = avformat_open_input(&pFormatContext, path.UTF8String, NULL, &opts);
+        pFormatContext = avformat_alloc_context();
+        int ret = avformat_open_input(&pFormatContext, path.UTF8String, NULL, NULL);
         if (ret < 0) {
             av_log(NULL, AV_LOG_DEBUG, "avformat_open_input失败");
         }
-        if (avformat_find_stream_info(pFormatContext, &opts) < 0) {
+        if (avformat_find_stream_info(pFormatContext, NULL) < 0) {
             av_log(NULL, AV_LOG_DEBUG, "没找到数据流信息\n");
         }
         for (int i = 0; i < pFormatContext->nb_streams; i++) {
