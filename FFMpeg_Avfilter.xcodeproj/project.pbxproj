@@ -937,6 +937,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "hollyland.FFMpeg-Avfilter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e";
 			};
 			name = Debug;
 		};
@@ -962,6 +963,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "hollyland.FFMpeg-Avfilter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e";
 			};
 			name = Release;
 		};

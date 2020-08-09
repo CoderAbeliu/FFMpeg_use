@@ -87,16 +87,29 @@ AVFilterGraph *filter_graph;
 - (BOOL)initFilters {
     char args[512];
     int ret;
-    
-    AVFilter *buffersrc = avfilter_get_by_name("buffer");
-    AVFilter *buffersink = avfilter_get_by_name("buffersink");
-    AVFilterInOut *outputs = avfilter_inout_alloc();
-    AVFilterInOut *inputs = avfilter_inout_alloc();
-    enum AVPixelFormat pix_fmts[] = { AV_PIX_FMT_YUV420P, AV_PIX_FMT_NONE };
-    AVBufferSinkParams *buffersink_params;
-    
+    // 1.初始化滤波器结构体
     filter_graph = avfilter_graph_alloc();
     
+    // 2.获取两个特殊的滤波器，输入和输出(buffer/buffersink)
+    AVFilter *buffersrc = avfilter_get_by_name("buffer");
+    AVFilter *buffersink = avfilter_get_by_name("buffersink");
+    // 3.为滤波器添加像素等配置
+    snprintf(args, sizeof(args),
+               "video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d",
+               pCodecContext->width, pCodecContext->height, AV_PIX_FMT_YUV420P,
+               1, 1,
+             16, 9);
+    // 4.创建输入滤波器
+    ret = avfilter_graph_create_filter(&buffersrc_ctx, buffersrc, "in", args, NULL, filter_graph);
+    
+    if (ret < 0) {
+        NSLog(@"创建滤镜输入失败");
+        return NO;
+    }
+
+    // 5.创建输出滤波器的配置结构体
+    AVBufferSinkParams *buffersink_params;
+    enum AVPixelFormat pix_fmts[] = { AV_PIX_FMT_YUV420P, AV_PIX_FMT_NONE };
     buffersink_params = av_buffersink_params_alloc();
     buffersink_params->pixel_fmts = pix_fmts;
     ret = avfilter_graph_create_filter(&buffersink_ctx, buffersink, "out", NULL, buffersink_params, filter_graph);
@@ -105,19 +118,10 @@ AVFilterGraph *filter_graph;
         NSLog(@"创建buffersink失败");
         return false;
     }
-    // 从H264 解码出来的AVCodecContext 时基 和 画面比例都是0
-    snprintf(args, sizeof(args),
-               "video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d",
-               pCodecContext->width, pCodecContext->height, AV_PIX_FMT_YUV420P,
-               1, 1,
-             16, 9);
-    ret = avfilter_graph_create_filter(&buffersrc_ctx, buffersrc, "in", args, NULL, filter_graph);
     
-    if (ret < 0) {
-        NSLog(@"创建滤镜输入失败");
-        return NO;
-    }
-
+    // 6.创建输入输出的列表(包含名称及下一个输入或者输出)
+    AVFilterInOut *outputs = avfilter_inout_alloc();
+    AVFilterInOut *inputs = avfilter_inout_alloc();
     outputs->name       = av_strdup("in");
     outputs->filter_ctx = buffersrc_ctx;
     outputs->pad_idx    = 0;
@@ -127,12 +131,15 @@ AVFilterGraph *filter_graph;
     inputs->filter_ctx = buffersink_ctx;
     inputs->pad_idx    = 0;
     inputs->next = NULL;
+    
+    // 7.解析字符串，构建滤波器
     const char *filter_descr = "lutyuv='u=128:v=128'";
     ret = avfilter_graph_parse(filter_graph, filter_descr, inputs, outputs, NULL);
     if (ret < 0) {
         NSLog(@"水印加载失败");
         return NO;
     }
+    // 8.上传滤波器
     ret = avfilter_graph_config(filter_graph, NULL);
     if (ret < 0) {
         NSLog(@"水印连接存在错误显示");

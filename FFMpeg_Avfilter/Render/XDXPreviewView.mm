@@ -332,12 +332,12 @@ GLfloat quadVertexData[] = {
 
 - (EAGLContext *)createOpenGLContextWithWidth:(int *)width height:(int *)height videoTextureCache:(CVOpenGLESTextureCacheRef *)videoTextureCache colorBufferHandle:(GLuint *)colorBufferHandle frameBufferHandle:(GLuint *)frameBufferHandle {
     self.contentScaleFactor = [[UIScreen mainScreen] scale];
-    
+    // 创建layer图层，用来加载opengl图层
     CAEAGLLayer *eaglLayer       = (CAEAGLLayer *)self.layer;
     eaglLayer.opaque = YES;
     eaglLayer.drawableProperties = @{kEAGLDrawablePropertyRetainedBacking   : [NSNumber numberWithBool:NO],
                                      kEAGLDrawablePropertyColorFormat       : kEAGLColorFormatRGBA8};
-    
+    // iOS提供给openglES 的接口
     EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
     [EAGLContext setCurrentContext:context];
     
@@ -359,25 +359,33 @@ GLfloat quadVertexData[] = {
     return context;
 }
 
+
+
 - (void)setupBuffersWithContext:(EAGLContext *)context width:(int *)width height:(int *)height colorBufferHandle:(GLuint *)colorBufferHandle frameBufferHandle:(GLuint *)frameBufferHandle {
     glDisable(GL_DEPTH_TEST);
     
-    glEnableVertexAttribArray(ATTRIB_VERTEX);
+    // 将数据加载到对应的顶点
     glVertexAttribPointer(ATTRIB_VERTEX, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), 0);
+    // GPU 可以读取顶点数据
+    glEnableVertexAttribArray(ATTRIB_VERTEX);
     
-    glEnableVertexAttribArray(ATTRIB_TEXCOORD);
+    // glVertexAttribPointer 和 glEnableVertexAttribArray 没有顺序，需要在draw之前完成
     glVertexAttribPointer(ATTRIB_TEXCOORD, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), 0);
+    glEnableVertexAttribArray(ATTRIB_TEXCOORD);
     
+    // 设置framebuffer，帧缓冲区
     glGenFramebuffers(1, frameBufferHandle);
     glBindFramebuffer(GL_FRAMEBUFFER, *frameBufferHandle);
-    
+    // 设置renderbuffer，渲染缓冲区
     glGenRenderbuffers(1, colorBufferHandle);
     glBindRenderbuffer(GL_RENDERBUFFER, *colorBufferHandle);
     
+    // 将可绘制对象的存储半丁到opengles 的renderbuffer上
     [context renderbufferStorage:GL_RENDERBUFFER fromDrawable:(CAEAGLLayer *)self.layer];
+    
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH , width);
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, height);
-    
+    // 将渲染缓冲区挂载到当前帧缓冲区上
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, *colorBufferHandle);
 }
 
@@ -387,6 +395,7 @@ GLfloat quadVertexData[] = {
     
     NSString *shaderName;
     GLuint   program;
+    // 创建程序
     program = glCreateProgram();
     
     if (type == XDXPixelBufferTypeNV12) {
@@ -396,25 +405,26 @@ GLfloat quadVertexData[] = {
         shaderName = @"XDXPreviewRGBShader";
         _rgbProgram = program;
     }
-    
+    // 加载编译顶点着色器
     vertShaderURL = [[NSBundle mainBundle] URLForResource:shaderName withExtension:@"vsh"];
     if (![self compileShader:&vertShader type:GL_VERTEX_SHADER URL:vertShaderURL]) {
         log4cplus_error(kModuleName, "Failed to compile vertex shader");
         return;
     }
-    
+    // 加载编译片段着色器
     fragShaderURL = [[NSBundle mainBundle] URLForResource:shaderName withExtension:@"fsh"];
     if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER URL:fragShaderURL]) {
         log4cplus_error(kModuleName, "Failed to compile fragment shader");
         return;
     }
-    
+    // 连接着色器和程序
     glAttachShader(program, vertShader);
     glAttachShader(program, fragShader);
-    
+    // 将通用顶点属性索引与命名属性变量相关联,对应vsh 内部的顶点
     glBindAttribLocation(program, ATTRIB_VERTEX  , "position");
     glBindAttribLocation(program, ATTRIB_TEXCOORD, "inputTextureCoordinate");
     
+    // 链接程序
     if (![self linkProgram:program]) {
         if (vertShader) {
             glDeleteShader(vertShader);
