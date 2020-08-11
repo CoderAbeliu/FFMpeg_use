@@ -6,12 +6,12 @@
 //  Copyright © 2020 hollyland－Apple. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "DecodeViewController.h"
 #import "YJFileParseHandler.h"
 #import "YJFFMpegDecode.h"
 #import "XDXPreviewView.h"
 
-@interface ViewController ()<YJFFMpegDelegate>
+@interface DecodeViewController ()<YJFFMpegDelegate>
 /** 读取工具类*/
 @property (nonatomic, strong) YJFileParseHandler *fileHandle;
 
@@ -22,7 +22,7 @@
 @property (nonatomic, strong) XDXPreviewView *preView;
 @end
 
-@implementation ViewController
+@implementation DecodeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,11 +39,11 @@
             [self.decode startDecodeVideoDataWithPkt:packet];
         }];
     });
-    self.preView = [[XDXPreviewView alloc] initWithFrame:CGRectMake(0, 0, 160 * 3, 90 * 3)];
+    self.preView = [[XDXPreviewView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 90 * 2)];
     [self.view addSubview:self.preView];
     self.preView.center = self.view.center;
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(0, 0, 100, 100);
+    btn.frame = CGRectMake(0, 100, 100, 100);
     btn.backgroundColor = [UIColor redColor];
     [btn addTarget:self action:@selector(stopParse:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];

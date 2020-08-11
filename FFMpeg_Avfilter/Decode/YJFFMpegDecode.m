@@ -14,7 +14,7 @@
 #import <libavfilter/buffersink.h>
 
 
-#define KVIDEOTOOLBOX 0
+#define KVIDEOTOOLBOX 1
 
 static AVBufferRef *hw_device_ctx = NULL;
 AVFilterContext *buffersink_ctx;
@@ -196,8 +196,8 @@ AVFilterGraph *filter_graph;
     filter_graph = avfilter_graph_alloc();
     
     // 2.获取两个特殊的滤波器，输入和输出(buffer/buffersink)
-    AVFilter *buffersrc = avfilter_get_by_name("buffer");
-    AVFilter *buffersink = avfilter_get_by_name("buffersink");
+    const  AVFilter *buffersrc = avfilter_get_by_name("buffer");
+    const AVFilter *buffersink = avfilter_get_by_name("buffersink");
     // 3.为滤波器添加像素等配置
     snprintf(args, sizeof(args),
                "video_size=%dx%d:pix_fmt=%d:time_base=%d/%d:pixel_aspect=%d/%d",

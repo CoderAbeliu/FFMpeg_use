@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		105DE02B24D901F900523B85 /* stream1.h264 in Resources */ = {isa = PBXBuildFile; fileRef = 105DE02A24D9017D00523B85 /* stream1.h264 */; };
 		1089CD8924D7DFBE00DE4584 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1089CD8824D7DFBE00DE4584 /* AppDelegate.m */; };
-		1089CD8F24D7DFBE00DE4584 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1089CD8E24D7DFBE00DE4584 /* ViewController.m */; };
+		1089CD8F24D7DFBE00DE4584 /* DecodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1089CD8E24D7DFBE00DE4584 /* DecodeViewController.m */; };
 		1089CD9224D7DFBE00DE4584 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1089CD9024D7DFBE00DE4584 /* Main.storyboard */; };
 		1089CD9424D7DFC900DE4584 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1089CD9324D7DFC900DE4584 /* Assets.xcassets */; };
 		1089CD9724D7DFC900DE4584 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1089CD9524D7DFC900DE4584 /* LaunchScreen.storyboard */; };
@@ -41,6 +41,9 @@
 		1089CE6D24D7EDC000DE4584 /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1089CE3824D7E3C100DE4584 /* libavfilter.a */; };
 		1089CE7B24D7EE1600DE4584 /* libx264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1089CE7A24D7EE1600DE4584 /* libx264.a */; };
 		108FFF2824DD364F005A1AF1 /* normal1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 108FFF2724DD364F005A1AF1 /* normal1.mp4 */; };
+		10D05D2524E1455200933FA7 /* HardEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D05D2424E1455200933FA7 /* HardEncode.m */; };
+		10D05D3D24E24C6700933FA7 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D05D3C24E24C6700933FA7 /* RootViewController.m */; };
+		10D05D4324E2734100933FA7 /* EncodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10D05D4224E2734100933FA7 /* EncodeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,8 +68,8 @@
 		1089CD8424D7DFBE00DE4584 /* FFMpeg_Avfilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FFMpeg_Avfilter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1089CD8724D7DFBE00DE4584 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1089CD8824D7DFBE00DE4584 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1089CD8D24D7DFBE00DE4584 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		1089CD8E24D7DFBE00DE4584 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1089CD8D24D7DFBE00DE4584 /* DecodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DecodeViewController.h; sourceTree = "<group>"; };
+		1089CD8E24D7DFBE00DE4584 /* DecodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DecodeViewController.m; sourceTree = "<group>"; };
 		1089CD9124D7DFBE00DE4584 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1089CD9324D7DFC900DE4584 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1089CD9624D7DFC900DE4584 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -222,6 +225,12 @@
 		1089CE7824D7EE1600DE4584 /* x264.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x264.h; sourceTree = "<group>"; };
 		1089CE7A24D7EE1600DE4584 /* libx264.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libx264.a; sourceTree = "<group>"; };
 		108FFF2724DD364F005A1AF1 /* normal1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = normal1.mp4; sourceTree = "<group>"; };
+		10D05D2324E1455200933FA7 /* HardEncode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HardEncode.h; sourceTree = "<group>"; };
+		10D05D2424E1455200933FA7 /* HardEncode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HardEncode.m; sourceTree = "<group>"; };
+		10D05D3B24E24C6700933FA7 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		10D05D3C24E24C6700933FA7 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		10D05D4124E2734100933FA7 /* EncodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EncodeViewController.h; sourceTree = "<group>"; };
+		10D05D4224E2734100933FA7 /* EncodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EncodeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,12 +310,11 @@
 			children = (
 				1089CD8724D7DFBE00DE4584 /* AppDelegate.h */,
 				1089CD8824D7DFBE00DE4584 /* AppDelegate.m */,
-				1089CD8D24D7DFBE00DE4584 /* ViewController.h */,
-				1089CD8E24D7DFBE00DE4584 /* ViewController.m */,
-				1089CE5824D7E75300DE4584 /* YJFileParseHandler.h */,
-				1089CE5924D7E75300DE4584 /* YJFileParseHandler.m */,
-				1089CE4824D7E42000DE4584 /* YJFFMpegDecode.h */,
-				1089CE4924D7E42000DE4584 /* YJFFMpegDecode.m */,
+				10D05D3B24E24C6700933FA7 /* RootViewController.h */,
+				10D05D3C24E24C6700933FA7 /* RootViewController.m */,
+				10D05D3724E24C0500933FA7 /* Encode */,
+				10D05D2224E1451C00933FA7 /* Parse */,
+				10D05D2124E1451200933FA7 /* Decode */,
 				1089CD9024D7DFBE00DE4584 /* Main.storyboard */,
 				1089CD9324D7DFC900DE4584 /* Assets.xcassets */,
 				1089CD9524D7DFC900DE4584 /* LaunchScreen.storyboard */,
@@ -609,6 +617,37 @@
 			path = lib;
 			sourceTree = "<group>";
 		};
+		10D05D2124E1451200933FA7 /* Decode */ = {
+			isa = PBXGroup;
+			children = (
+				1089CD8D24D7DFBE00DE4584 /* DecodeViewController.h */,
+				1089CD8E24D7DFBE00DE4584 /* DecodeViewController.m */,
+				1089CE4824D7E42000DE4584 /* YJFFMpegDecode.h */,
+				1089CE4924D7E42000DE4584 /* YJFFMpegDecode.m */,
+			);
+			path = Decode;
+			sourceTree = "<group>";
+		};
+		10D05D2224E1451C00933FA7 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+				1089CE5824D7E75300DE4584 /* YJFileParseHandler.h */,
+				1089CE5924D7E75300DE4584 /* YJFileParseHandler.m */,
+			);
+			path = Parse;
+			sourceTree = "<group>";
+		};
+		10D05D3724E24C0500933FA7 /* Encode */ = {
+			isa = PBXGroup;
+			children = (
+				10D05D2324E1455200933FA7 /* HardEncode.h */,
+				10D05D2424E1455200933FA7 /* HardEncode.m */,
+				10D05D4124E2734100933FA7 /* EncodeViewController.h */,
+				10D05D4224E2734100933FA7 /* EncodeViewController.m */,
+			);
+			path = Encode;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -676,6 +715,7 @@
 				TargetAttributes = {
 					1089CD8324D7DFBE00DE4584 = {
 						CreatedOnToolsVersion = 11.3.1;
+						LastSwiftMigration = 1130;
 					};
 					1089CD9E24D7DFC900DE4584 = {
 						CreatedOnToolsVersion = 11.3.1;
@@ -745,10 +785,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1089CD8F24D7DFBE00DE4584 /* ViewController.m in Sources */,
+				1089CD8F24D7DFBE00DE4584 /* DecodeViewController.m in Sources */,
 				1089CE5324D7E6F200DE4584 /* XDXPreviewView.mm in Sources */,
 				1089CD8924D7DFBE00DE4584 /* AppDelegate.m in Sources */,
 				1089CE5A24D7E75300DE4584 /* YJFileParseHandler.m in Sources */,
+				10D05D4324E2734100933FA7 /* EncodeViewController.m in Sources */,
+				10D05D2524E1455200933FA7 /* HardEncode.m in Sources */,
+				10D05D3D24E24C6700933FA7 /* RootViewController.m in Sources */,
 				1089CD9A24D7DFC900DE4584 /* main.m in Sources */,
 				1089CE4A24D7E42000DE4584 /* YJFFMpegDecode.m in Sources */,
 			);
@@ -919,6 +962,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XDB3HGKJ3W;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/FFMpeg_Avfilter/FFMpeg-iOS/include2\"";
@@ -936,6 +980,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "hollyland.FFMpeg-Avfilter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FFMpeg_Avfilter/Encode/FFMpeg_Avfilter-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e";
 			};
@@ -945,6 +992,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XDB3HGKJ3W;
 				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/FFMpeg_Avfilter/FFMpeg-iOS/include2\"";
@@ -962,6 +1010,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "hollyland.FFMpeg-Avfilter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "FFMpeg_Avfilter/Encode/FFMpeg_Avfilter-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "arm64 arm64e";
 			};
