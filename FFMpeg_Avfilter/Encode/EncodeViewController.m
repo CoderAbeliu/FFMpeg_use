@@ -7,6 +7,7 @@
 //
 
 #import "EncodeViewController.h"
+#import "HardEncode.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface EncodeViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate>
@@ -14,6 +15,8 @@
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 /** 预览图层*/
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *preViewLayer;
+
+@property (nonatomic, strong) HardEncode *encode;
 
 @end
 
@@ -27,6 +30,7 @@
     [self.view addSubview:preView];
     
     [self initCaptureSessionWithView:preView];
+    [self initEncode];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.backgroundColor = [UIColor redColor];
@@ -80,6 +84,15 @@
     self.preViewLayer = preViewLayer;
 }
 
+- (void)initEncode {
+    VideoEncodeConfig *config = [[VideoEncodeConfig alloc] init];
+    config.size = CGSizeMake(1920, 1080);
+    config.frameRate = 30;
+    config.bitRate = 2048;
+    config.gopRate = 30;
+    self.encode = [[HardEncode alloc] initWithConfig:config];
+}
+
 - (void)capture:(UIButton *)senderBtn {
     if (self.captureSession.isRunning) {
         [self.captureSession stopRunning];
@@ -95,7 +108,7 @@
 }
 
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    NSLog(@"%s", __func__);
+    [self.encode startEncodeWithCMSampleBufferRef:sampleBuffer];
 }
 
 
