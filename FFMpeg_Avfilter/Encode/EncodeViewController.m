@@ -15,7 +15,7 @@
 @property (nonatomic, strong) AVCaptureSession *captureSession;
 /** 预览图层*/
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *preViewLayer;
-
+/** 编码工具*/
 @property (nonatomic, strong) HardEncode *encode;
 
 @end
