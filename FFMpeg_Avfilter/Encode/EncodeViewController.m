@@ -56,7 +56,7 @@
     
     // 管理session
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
-    session.sessionPreset = AVCaptureSessionPreset1280x720;
+    session.sessionPreset = AVCaptureSessionPreset1920x1080;
     self.captureSession = session;
     
     // 设备初始化
@@ -67,7 +67,6 @@
     if (!error) {
         [session addInput:input];
     }
-
     // 输出数据配置
     AVCaptureVideoDataOutput *videoDataOutput = [[AVCaptureVideoDataOutput alloc] init];
     [session addOutput:videoDataOutput];
@@ -76,7 +75,8 @@
     [videoDataOutput setSampleBufferDelegate:self queue:videoQueue];
     // 设置采集的方向
     AVCaptureConnection *connection = [videoDataOutput connectionWithMediaType:AVMediaTypeVideo];
-    [connection setVideoOrientation:AVCaptureVideoOrientationPortrait];
+    [connection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
+    [session commitConfiguration];
     // session对应的渲染图层
     AVCaptureVideoPreviewLayer *preViewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
     preViewLayer.frame = preView.frame;
@@ -87,9 +87,11 @@
 - (void)initEncode {
     VideoEncodeConfig *config = [[VideoEncodeConfig alloc] init];
     config.size = CGSizeMake(1920, 1080);
-    config.frameRate = 30;
-    config.bitRate = 2048;
-    config.gopRate = 30;
+    config.videoBitRate = 2000*1024;
+    config.videoMaxBitRate = 1000*1024;
+    config.videoMinBitRate = 500*1024;
+    config.videoFrameRate = 24;
+    config.videoMaxKeyframeInterval = 48;
     self.encode = [[HardEncode alloc] initWithConfig:config];
 }
 

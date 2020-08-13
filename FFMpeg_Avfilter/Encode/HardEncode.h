@@ -31,12 +31,23 @@ NS_ASSUME_NONNULL_BEGIN
 /** 编码图像大小*/
 @property (nonatomic, assign) CGSize size;
 /** 帧率*/
-@property (nonatomic, assign) NSInteger frameRate;
+@property (nonatomic, assign) NSInteger videoFrameRate;
 /** 比特率*/
-@property (nonatomic, assign) NSInteger bitRate;
-/** 关键帧间隔 */
-@property (nonatomic, assign) NSInteger gopRate;
+@property (nonatomic, assign) NSInteger videoBitRate;
 
+@property (nonatomic, assign) NSInteger videoMaxBitRate;
+
+@property (nonatomic, assign) NSInteger videoMinBitRate;
+
+@property (nonatomic, assign) NSInteger videoMaxKeyframeInterval;
+
+/*
+videoConfiguration.videoBitRate = 800*1024;
+videoConfiguration.videoMaxBitRate = 1000*1024;
+videoConfiguration.videoMinBitRate = 500*1024;
+videoConfiguration.videoFrameRate = 24;
+videoConfiguration.videoMaxKeyframeInterval = 48;
+ */
 @end
 
 NS_ASSUME_NONNULL_END
