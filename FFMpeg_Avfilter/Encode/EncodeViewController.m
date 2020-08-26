@@ -88,9 +88,9 @@
     VideoEncodeConfig *config = [[VideoEncodeConfig alloc] init];
     config.size = CGSizeMake(1920, 1080);
     config.videoBitRate = 2000*1024;
-    config.videoMaxBitRate = 1000*1024;
+    config.videoMaxBitRate = 3000*1024;
     config.videoMinBitRate = 500*1024;
-    config.videoFrameRate = 24;
+    config.videoFrameRate = 30;
     config.videoMaxKeyframeInterval = 48;
     self.encode = [[HardEncode alloc] initWithConfig:config];
 }

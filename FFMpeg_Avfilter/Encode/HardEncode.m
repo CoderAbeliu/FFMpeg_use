@@ -161,7 +161,7 @@ static void outputCallback(
     NSArray *limit = @[@(config.videoBitRate * 1.5/8), @(1)];
     VTSessionSetProperty(pCompressionSession, kVTCompressionPropertyKey_DataRateLimits, (__bridge CFArrayRef)limit);
     // 编码登记
-    VTSessionSetProperty(pCompressionSession, kVTCompressionPropertyKey_ProfileLevel, kVTProfileLevel_H264_Main_AutoLevel);
+    VTSessionSetProperty(pCompressionSession, kVTCompressionPropertyKey_ProfileLevel, kVTProfileLevel_H264_High_AutoLevel);
     // 编码类型
     VTSessionSetProperty(pCompressionSession, kVTCompressionPropertyKey_H264EntropyMode, kVTH264EntropyMode_CABAC);
     VTCompressionSessionPrepareToEncodeFrames(pCompressionSession);
