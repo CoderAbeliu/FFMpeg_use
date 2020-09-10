@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "DecodeViewController.h"
 #import "EncodeViewController.h"
+#import "TestViewController.h"
 
 @interface RootViewController ()
 
@@ -29,7 +30,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return 3;
 }
 
 #pragma mark delegate
@@ -45,7 +46,12 @@
             EncodeViewController *encodeVC = [[EncodeViewController alloc] init];
             [self.navigationController pushViewController:encodeVC animated:YES];
         }
-            
+            break;
+        case 2: {
+            TestViewController *testVC = [[TestViewController alloc] init];
+            [self.navigationController pushViewController:testVC animated:YES];
+        }
+            break;
         default:
             break;
     }
@@ -64,6 +70,7 @@
             cell.textLabel.text = @"编码操作";
             break;
         default:
+            cell.textLabel.text = [NSString stringWithFormat:@"test%ld", indexPath.row];
             break;
     }
     return cell;
