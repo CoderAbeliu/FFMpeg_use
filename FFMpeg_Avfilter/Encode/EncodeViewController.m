@@ -9,6 +9,7 @@
 #import "EncodeViewController.h"
 #import "HardEncode.h"
 #import <AVFoundation/AVFoundation.h>
+#import "XDXPreviewView.h"
 
 @interface EncodeViewController ()<AVCaptureVideoDataOutputSampleBufferDelegate>
 
@@ -17,8 +18,11 @@
 @property (nonatomic, strong) AVCaptureVideoPreviewLayer *preViewLayer;
 /** 编码工具*/
 @property (nonatomic, strong) HardEncode *encode;
-
+/** 渲染图层*/
+@property (nonatomic, strong) XDXPreviewView *preView;
 @end
+
+#define USEGLVIEW 1
 
 @implementation EncodeViewController
 
@@ -29,8 +33,8 @@
     UIView *preView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - 100)];
     [self.view addSubview:preView];
     
-    [self initCaptureSessionWithView:preView];
-    [self initEncode];
+    [self initCaptureSessionWithView:preView isGLView:USEGLVIEW];
+//    [self initEncode];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     btn.backgroundColor = [UIColor redColor];
@@ -52,7 +56,7 @@
 
 #pragma mark private method
 
-- (void)initCaptureSessionWithView:(UIView *)preView {
+- (void)initCaptureSessionWithView:(UIView *)preView isGLView:(BOOL)isGLView {
     
     // 管理session
     AVCaptureSession *session = [[AVCaptureSession alloc] init];
@@ -78,10 +82,15 @@
     [connection setVideoOrientation:AVCaptureVideoOrientationLandscapeLeft];
     [session commitConfiguration];
     // session对应的渲染图层
-    AVCaptureVideoPreviewLayer *preViewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-    preViewLayer.frame = preView.frame;
-    [preView.layer insertSublayer:preViewLayer atIndex:0];
-    self.preViewLayer = preViewLayer;
+    if (isGLView) {
+        self.preView = [[XDXPreviewView alloc] initWithFrame:self.view.frame];
+        [self.view addSubview:self.preView];
+    } else {
+        AVCaptureVideoPreviewLayer *preViewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
+        preViewLayer.frame = preView.frame;
+        [preView.layer insertSublayer:preViewLayer atIndex:0];
+        self.preViewLayer = preViewLayer;
+    }
 }
 
 - (void)initEncode {
@@ -110,7 +119,14 @@
 }
 
 - (void)captureOutput:(AVCaptureOutput *)output didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection {
-    [self.encode startEncodeWithCMSampleBufferRef:sampleBuffer];
+
+    if (USEGLVIEW) {
+        CVPixelBufferRef pixelBufferRef = CMSampleBufferGetImageBuffer(sampleBuffer);
+        [self.preView displayPixelBuffer:pixelBufferRef];
+    } else {
+        [self.encode startEncodeWithCMSampleBufferRef:sampleBuffer];
+    }
+    
 }
 
 
