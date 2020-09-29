@@ -10,6 +10,7 @@
 #import "YJFileParseHandler.h"
 #import "YJFFMpegDecode.h"
 #import "XDXPreviewView.h"
+#import "YJGLView.h"
 
 @interface DecodeViewController ()<YJFFMpegDelegate>
 /** 读取工具类*/
@@ -39,7 +40,7 @@
             [self.decode startDecodeVideoDataWithPkt:packet];
         }];
     });
-    self.preView = [[XDXPreviewView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 90 * 2)];
+    self.preView = [[XDXPreviewView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame))];
     [self.view addSubview:self.preView];
     self.preView.center = self.view.center;
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -47,6 +48,9 @@
     btn.backgroundColor = [UIColor redColor];
     [btn addTarget:self action:@selector(stopParse:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
+    
+    YJGLView *glView = [[YJGLView alloc] initWithFrame:self.view.frame];
+    
 }
 
 - (void)stopParse:(UIButton *)sender {

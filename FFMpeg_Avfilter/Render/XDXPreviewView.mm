@@ -348,7 +348,7 @@ GLfloat quadVertexData[] = {
                 frameBufferHandle:frameBufferHandle];
     
     [self loadShaderWithBufferType:XDXPixelBufferTypeNV12];
-    [self loadShaderWithBufferType:XDXPixelBufferTypeRGB];
+//    [self loadShaderWithBufferType:XDXPixelBufferTypeRGB];
     
     if (!*videoTextureCache) {
         CVReturn err = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, NULL, context, NULL, videoTextureCache);
@@ -360,7 +360,7 @@ GLfloat quadVertexData[] = {
 }
 
 
-
+/** 配置FBO/VBO */
 - (void)setupBuffersWithContext:(EAGLContext *)context width:(int *)width height:(int *)height colorBufferHandle:(GLuint *)colorBufferHandle frameBufferHandle:(GLuint *)frameBufferHandle {
     glDisable(GL_DEPTH_TEST);
     
@@ -389,6 +389,7 @@ GLfloat quadVertexData[] = {
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, *colorBufferHandle);
 }
 
+/** 加载着色器和对应的顶点 */
 - (void)loadShaderWithBufferType:(XDXPixelBufferType)type {
     GLuint vertShader, fragShader;
     NSURL  *vertShaderURL, *fragShaderURL;
@@ -459,6 +460,7 @@ GLfloat quadVertexData[] = {
     }
 }
 
+/** 加载和编译 */
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type URL:(NSURL *)URL {
     NSError *error;
     NSString *sourceString = [[NSString alloc] initWithContentsOfURL:URL

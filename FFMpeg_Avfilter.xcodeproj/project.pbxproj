@@ -67,7 +67,7 @@
 
 /* Begin PBXFileReference section */
 		104D2F7B250A4496004466FF /* YJGLView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YJGLView.h; sourceTree = "<group>"; };
-		104D2F7C250A4496004466FF /* YJGLView.mm */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; path = YJGLView.mm; sourceTree = "<group>"; };
+		104D2F7C250A4496004466FF /* YJGLView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = YJGLView.mm; sourceTree = "<group>"; };
 		104D2F7E250A4AEB004466FF /* TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		104D2F7F250A4AEB004466FF /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
 		105DE02A24D9017D00523B85 /* stream1.h264 */ = {isa = PBXFileReference; lastKnownFileType = file; path = stream1.h264; sourceTree = "<group>"; };
